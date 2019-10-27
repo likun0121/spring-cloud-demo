@@ -1,0 +1,10 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+#  没有生效？
+#  instance:
+#    hostname: client-test
+spring:
+  application:
+    name: client

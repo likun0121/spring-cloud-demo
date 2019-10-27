@@ -9,5 +9,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>eureka</module>
+        <module>client</module>
+    </modules>
 
 </project>
