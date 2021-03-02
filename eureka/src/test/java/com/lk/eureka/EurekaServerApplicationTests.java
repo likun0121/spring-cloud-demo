@@ -1,4 +1,4 @@
-package com.lk.eurekaserver;
+package com.lk.eureka;
 
 
 import org.junit.Test;
