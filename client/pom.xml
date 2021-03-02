@@ -2,20 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--<parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.M3</version>
-        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;
-    </parent>-->
     <parent>
         <groupId>com.lk</groupId>
         <artifactId>spring-cloud-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka-server</name>
+    <name>client</name>
     <description>Demo project for Spring Boot</description>
 
     <!--<properties>
@@ -28,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
         <dependency>
@@ -37,7 +31,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
