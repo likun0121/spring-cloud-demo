@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @Slf4j
-public class ClientController {
+public class RestClientController {
 
     @Autowired
     private LoadBalancerClient loadBalancerClient;
