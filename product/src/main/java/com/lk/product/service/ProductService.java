@@ -1,6 +1,7 @@
 package com.lk.product.service;
 
 import com.lk.product.dataobject.ProductInfo;
+import com.lk.product.dto.CartDTO;
 
 import java.util.List;
 
@@ -15,4 +16,14 @@ public interface ProductService {
      * @return 所有上架商品
      */
     List<ProductInfo> findUpAll();
+
+    /**
+     * 根据id查询商品
+     *
+     * @param productIdList id列表
+     * @return 商品列表
+     */
+    List<ProductInfo> listProductByIds(List<String> productIdList);
+
+    void decreaseStock(List<CartDTO> cartDTOList);
 }

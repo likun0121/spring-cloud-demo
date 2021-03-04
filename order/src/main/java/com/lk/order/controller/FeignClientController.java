@@ -1,10 +1,16 @@
 package com.lk.order.controller;
 
 import com.lk.order.client.ProductClient;
+import com.lk.order.dataobject.ProductInfo;
+import com.lk.order.dto.CartDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author LK
@@ -18,6 +24,7 @@ public class FeignClientController {
 
     /**
      * 使用 {@link org.springframework.cloud.netflix.feign.FeignClient}
+     *
      * @return String
      */
     @GetMapping("/get_product_msg_feign")
@@ -27,4 +34,17 @@ public class FeignClientController {
         return response;
     }
 
+    @GetMapping("/getProductList")
+    public List<ProductInfo> getProductList() {
+        return productClient.listByIds(Arrays.asList("157875227953464068"));
+    }
+
+    @GetMapping("/productDecreaseStock")
+    public String productDecreaseStock() {
+        CartDTO cartDTO = new CartDTO();
+        cartDTO.setProductId("164103465734242707");
+        cartDTO.setProductQuantity(3);
+        productClient.decreaseStock(Arrays.asList(cartDTO));
+        return "success";
+    }
 }
