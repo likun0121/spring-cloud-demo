@@ -54,7 +54,7 @@ public class OrderController {
 
         OrderDTO result = orderService.create(orderDTO);
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(1);
         map.put("orderId", result.getOrderId());
         return ResultVOUtil.success(map);
     }

@@ -3,6 +3,7 @@ package com.lk.product.controller;
 import com.lk.product.dataobject.ProductCategory;
 import com.lk.product.dataobject.ProductInfo;
 import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 import com.lk.product.service.CategoryService;
 import com.lk.product.service.ProductService;
 import com.lk.product.util.ResultVoUtil;
@@ -77,7 +78,7 @@ public class ProductController {
      * @return
      */
     @PostMapping("/listByIds")
-    public List<ProductInfo> listByIds(@RequestBody List<String> productIdList) {
+    public List<ProductInfoDTO> listByIds(@RequestBody List<String> productIdList) {
         return productService.listProductByIds(productIdList);
     }
 

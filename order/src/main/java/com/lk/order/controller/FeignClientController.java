@@ -1,12 +1,11 @@
 package com.lk.order.controller;
 
-import com.lk.order.client.ProductClient;
-import com.lk.order.dataobject.ProductInfo;
-import com.lk.order.dto.CartDTO;
+import com.lk.product.client.ProductClient;
+import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -35,7 +34,7 @@ public class FeignClientController {
     }
 
     @GetMapping("/getProductList")
-    public List<ProductInfo> getProductList() {
+    public List<ProductInfoDTO> getProductList() {
         return productClient.listByIds(Arrays.asList("157875227953464068"));
     }
 

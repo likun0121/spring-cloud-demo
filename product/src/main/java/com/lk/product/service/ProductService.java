@@ -2,6 +2,7 @@ package com.lk.product.service;
 
 import com.lk.product.dataobject.ProductInfo;
 import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface ProductService {
      * @param productIdList id列表
      * @return 商品列表
      */
-    List<ProductInfo> listProductByIds(List<String> productIdList);
+    List<ProductInfoDTO> listProductByIds(List<String> productIdList);
 
     void decreaseStock(List<CartDTO> cartDTOList);
 }

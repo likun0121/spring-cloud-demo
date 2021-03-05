@@ -3,6 +3,7 @@ package com.lk.product.service;
 import com.lk.product.ProductApplicationTests;
 import com.lk.product.dataobject.ProductInfo;
 import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ProductServiceTest extends ProductApplicationTests {
 
     @Test
     public void listProductByIds() {
-        List<ProductInfo> list = productService.listProductByIds(Arrays.asList("157875196366160022", "157875227953464068"));
+        List<ProductInfoDTO> list = productService.listProductByIds(Arrays.asList("157875196366160022", "157875227953464068"));
         Assert.assertTrue(list.size() > 0);
     }
 

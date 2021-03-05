@@ -1,10 +1,8 @@
 package com.lk.order.service.impl;
 
-import com.lk.order.client.ProductClient;
 import com.lk.order.dataobject.OrderDetail;
 import com.lk.order.dataobject.OrderMaster;
 import com.lk.order.dataobject.ProductInfo;
-import com.lk.order.dto.CartDTO;
 import com.lk.order.dto.OrderDTO;
 import com.lk.order.enums.OrderStatusEnum;
 import com.lk.order.enums.PayStatusEnum;
@@ -12,6 +10,9 @@ import com.lk.order.repository.OrderDetailRepository;
 import com.lk.order.repository.OrderMasterRepository;
 import com.lk.order.service.OrderService;
 import com.lk.order.util.KeyUtil;
+import com.lk.product.client.ProductClient;
+import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,18 +45,18 @@ public class OrderServiceImpl implements OrderService {
         // 查询商品信息（调用商品服务）
         List<String> productIdList = orderDTO.getOrderDetailList().stream().map(OrderDetail::getProductId)
                 .collect(Collectors.toList());
-        List<ProductInfo> productInfoList = productClient.listByIds(productIdList);
+        List<ProductInfoDTO> productInfoDTOList = productClient.listByIds(productIdList);
         // 计算总价
         BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
-            for (ProductInfo productInfo : productInfoList) {
-                if (productInfo.getProductId().equals(orderDetail.getProductId())) {
+            for (ProductInfoDTO productInfoDTO : productInfoDTOList) {
+                if (productInfoDTO.getProductId().equals(orderDetail.getProductId())) {
                     // 单价 * 数量
-                    orderAmount = productInfo.getProductPrice()
+                    orderAmount = productInfoDTO.getProductPrice()
                             .multiply(new BigDecimal(orderDetail.getProductQuantity()))
                             .add(orderAmount);
 
-                    BeanUtils.copyProperties(productInfo, orderDetail);
+                    BeanUtils.copyProperties(productInfoDTO, orderDetail);
                     orderDetail.setOrderId(orderId);
                     orderDetail.setDetailId(KeyUtil.genUniqueKey());
                     orderDetail.setCreateTime(null);

@@ -2,17 +2,20 @@ package com.lk.product.service.impl;
 
 import com.lk.product.dataobject.ProductInfo;
 import com.lk.product.dto.CartDTO;
+import com.lk.product.dto.ProductInfoDTO;
 import com.lk.product.enums.ProductStatusEnum;
 import com.lk.product.enums.ResultEnum;
 import com.lk.product.exception.ProductException;
 import com.lk.product.repository.ProductInfoRepository;
 import com.lk.product.service.ProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author LK
@@ -29,8 +32,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductInfo> listProductByIds(List<String> productIdList) {
-        return productInfoRepository.findByProductIdIn(productIdList);
+    public List<ProductInfoDTO> listProductByIds(List<String> productIdList) {
+        List<ProductInfo> productInfoList = productInfoRepository.findByProductIdIn(productIdList);
+        return productInfoList.stream().map(e -> {
+            ProductInfoDTO productInfoDTO = new ProductInfoDTO();
+            BeanUtils.copyProperties(e, productInfoDTO);
+            return productInfoDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override
