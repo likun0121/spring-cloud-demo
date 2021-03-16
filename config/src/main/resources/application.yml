@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/likun0121/config-repo.git
+          basedir: /tmp
+  rabbitmq:
+    host: 192.168.56.101
+#          仓库为私有仓库时需要配置用户名密码
+#          username:
+#          password:
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8100
+# 暴露出统一配置的刷新接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
