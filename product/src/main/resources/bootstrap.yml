@@ -7,6 +7,11 @@ spring:
         enabled: true
         service-id: config
       profile: dev
+  rabbitmq:
+    host: 192.168.56.101
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   client:
     service-url:

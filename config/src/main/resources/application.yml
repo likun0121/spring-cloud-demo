@@ -7,11 +7,11 @@ spring:
         git:
           uri: https://gitee.com/likun0121/config-repo.git
           basedir: /tmp
-  rabbitmq:
-    host: 192.168.56.101
 #          仓库为私有仓库时需要配置用户名密码
 #          username:
 #          password:
+  rabbitmq:
+    host: 192.168.56.101
 eureka:
   client:
     service-url:

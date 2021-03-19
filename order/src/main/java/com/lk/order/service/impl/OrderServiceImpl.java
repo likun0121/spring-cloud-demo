@@ -2,7 +2,6 @@ package com.lk.order.service.impl;
 
 import com.lk.order.dataobject.OrderDetail;
 import com.lk.order.dataobject.OrderMaster;
-import com.lk.order.dataobject.ProductInfo;
 import com.lk.order.dto.OrderDTO;
 import com.lk.order.enums.OrderStatusEnum;
 import com.lk.order.enums.PayStatusEnum;
