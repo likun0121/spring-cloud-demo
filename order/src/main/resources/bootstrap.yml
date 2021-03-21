@@ -5,21 +5,8 @@ spring:
         enabled: true
         service-id: config
       profile: dev
-    stream:
-      bindings:
-        myMessage:
-          group: order
-          content-type: application/json
   application:
     name: order
-  rabbitmq:
-    host: 192.168.56.101
-    port: 5672
-    username: guest
-    password: guest
-  redis:
-    host: 192.168.56.101
-    port: 6379
 eureka:
   client:
     service-url:
