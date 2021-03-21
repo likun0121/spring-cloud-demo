@@ -35,6 +35,7 @@
         <module>product-client</module>
         <module>config</module>
         <module>api-gateway</module>
+        <module>user</module>
     </modules>
 
     <dependencyManagement>
