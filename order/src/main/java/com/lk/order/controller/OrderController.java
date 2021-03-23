@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -40,7 +41,7 @@ public class OrderController {
      */
     @PostMapping("/create")
     public ResultVO<Map<String, String>> create(@Valid OrderForm orderForm,
-                           BindingResult bindingResult) {
+                                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("【创建订单】参数不正确，orderForm={}", orderForm);
             throw new OrderException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
@@ -60,4 +61,8 @@ public class OrderController {
     }
 
 
+    @PostMapping("/finish")
+    public ResultVO<OrderDTO> finish(@RequestParam("orderId") String orderId) {
+        return ResultVOUtil.success(orderService.finish(orderId));
+    }
 }
