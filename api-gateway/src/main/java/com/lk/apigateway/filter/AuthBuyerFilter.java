@@ -18,8 +18,8 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 /**
  * @author LK
  */
-//@Component
-public class AuthFilter extends ZuulFilter {
+@Component
+public class AuthBuyerFilter extends ZuulFilter {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -36,7 +36,12 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return true;
+        RequestContext currentContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = currentContext.getRequest();
+        if ("/order/order/create".equals(request.getRequestURI())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -46,24 +51,11 @@ public class AuthFilter extends ZuulFilter {
 
         /*
         /order/create 只能买家访问（cookie里有openid）
-        /order/finish 只能卖家访问（cookie里有token，并且对应的redis中有值）
-        /product/list 都能访问
          */
-        if ("/order/order/create".equals(request.getRequestURI())) {
-            Cookie cookie = CookieUtils.getCookie(request, "openid");
-            if (cookie == null || StringUtils.isEmpty(cookie.getValue())) {
-                currentContext.setSendZuulResponse(false);
-                currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-            }
-        }
-
-        if ("/order/order/finish".equals(request.getRequestURI())) {
-            Cookie cookie = CookieUtils.getCookie(request, "token");
-            if (cookie == null || StringUtils.isEmpty(cookie.getValue())
-            || StringUtils.isEmpty(stringRedisTemplate.opsForValue().get("token_" + cookie.getValue()))) {
-                currentContext.setSendZuulResponse(false);
-                currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-            }
+        Cookie cookie = CookieUtils.getCookie(request, "openid");
+        if (cookie == null || StringUtils.isEmpty(cookie.getValue())) {
+            currentContext.setSendZuulResponse(false);
+            currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
         }
 
         return null;

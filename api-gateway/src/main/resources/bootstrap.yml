@@ -7,6 +7,9 @@ spring:
         enabled: true
         service-id: CONFIG
       profile: dev
+  redis:
+    host: 192.168.56.101
+    port: 6379
 eureka:
   client:
     service-url:
@@ -28,6 +31,8 @@ zuul:
 #    - /aProduct/product/listByIds
 #    - /myProduct/product/listByIds
     - /**/product/listByIds
+  # 忽略所有服务请求的敏感头信息，例如cookie
+  sensitive-headers:
 
 # 开放路由规则查询权限
 management:
