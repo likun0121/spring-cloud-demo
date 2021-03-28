@@ -79,6 +79,12 @@ public class ProductController {
      */
     @PostMapping("/listByIds")
     public List<ProductInfoDTO> listByIds(@RequestBody List<String> productIdList) {
+        try {
+            // 用于测试服务调用的熔断处理
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return productService.listProductByIds(productIdList);
     }
 
