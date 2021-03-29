@@ -7,6 +7,11 @@ spring:
       profile: dev
   application:
     name: order
+  zipkin:
+    base-url: http://192.168.56.101:9411/
+  sleuth:
+    sampler:
+      percentage: 1
 eureka:
   client:
     service-url:
@@ -17,12 +22,14 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 1000
-    getProductList:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
+            timeoutInMilliseconds: 5000
+#    getProductList:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
 feign:
   hystrix:
     enabled: true
+management:
+  context-path: /
